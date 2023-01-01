@@ -1,0 +1,61 @@
+header {
+    height:50px;
+     background: lightcyan;
+    color: rgb(20, 24, 24);
+    text-align: center;
+
+}
+header h1{
+    padding: 5px;
+}
+section{
+    border: 2px dashed grey;
+   padding-left: 30%;
+
+}
+body> div{
+    margin:5px;
+    padding: 5px;
+
+}
+h2{
+    text-align: center;
+}
+ul{
+    list-style: square  ;
+}
+div h2{
+    
+    background: lightgray;
+}
+footer{
+    
+    border: 0px solid burlywood;
+    height: 100px;
+    background:burlywood;
+}
+.ftext{
+  
+    padding:40px;
+    text-align: center;
+  
+    
+}
+nav{
+    background:grey;
+
+}
+nav a{
+    text-decoration: none;
+    background:lightgrey;
+    color:white;
+    display: inline-block;
+    padding: 5px;
+    margin:5px;
+}
+nav a:hover{
+    
+    background:white;
+    color:black;
+  
+}

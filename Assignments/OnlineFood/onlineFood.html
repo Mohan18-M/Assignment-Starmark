@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Food</title>
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="./onlineFood.css">
+    <script src="./onlineFood.js"></script>
+    <script>
+        const obj=new food();
+        
+        function funAdd(){
+            let i=parseInt($("#1minput").val());
+            obj.addFood(1,i);
+
+        }
+          
+        function init(){
+            $("#1mAdd").click(funAdd)
+
+
+        }
+
+        $(document).ready(init)
+    </script>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li>
+                <a href="">sign in</a>
+            </li>
+        </ul>
+    </nav>
+    <div>
+    <h1>Holiday Inn</h1>
+    </div>
+   <div><button style="float:right">ViewCart</button></div>
+    
+    <hr>
+
+    <div class="seeItems">
+        <div class="mMain">
+            <div class="mImg">
+                <img src="./images/ChickenBiryani.jpg" height="150px" width="65px"/>
+            </div>
+            <div class="mcontent">
+                    <div><p>Name:Biriyani</p> 
+                        <p>Price:250</p>
+                    </div>
+                        <input type="number" min="0" style="width:30px;" id="1minput" /> 
+                        <!-- <input type="button" value="+"> -->
+                        <button id="1mAdd">Add</button>  
+            </div>
+        </div>
+    
+    <div id="seeItems">
+        <div class="mMain">
+            <div class="mImg">
+                <img src="./images/burger.jpg" height="150px" width="65px"/>
+            </div>
+            <div class="mcontent">
+                    <div><p>Name:Burger</p>
+                        <p>Price:150</p>
+                    </div>
+                        <input type="number" min="0" style="width:30px;" id="2minput" /> 
+                        <!-- <input type="button" value="+"> -->
+                        <button id="2mAdd">Add</button>  
+            </div>
+        </div>
+    </div>
+    <div id="seeItems">
+        <div class="mMain">
+            <div class="mImg">
+                <img src="./images/gobi-manchurian-cauliflower-manchurian.jpg" height="150px" width="65px"/>
+            </div>
+            <div class="mcontent">
+                    <div><p>Name:Gobi Manchurian</p>
+                        <p>Price:100</p>
+                    </div>
+                        <input type="number" min="0" style="width:30px;" id="3minput" /> 
+                        <!-- <input type="button" value="+"> -->
+                        <button id="3mAdd">Add</button>  
+            </div>
+        </div>
+    </div>
+    <div id="seeItems">
+        <div class="mMain">
+            <div class="mImg">
+                <img src="./images/kerala-parotta-500x500.jpg" height="150px" width="65px"/>
+            </div>
+            <div class="mcontent">
+                    <div><p>Name:Parrota</p>
+                        <p>Price:80</p>
+                    </div>
+                        <input type="number" min="0" style="width:30px;" id="4minput" /> 
+                        <!-- <input type="button" value="+"> -->
+                        <button id="4mAdd">Add</button>  
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

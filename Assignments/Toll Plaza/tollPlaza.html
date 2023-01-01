@@ -1,0 +1,119 @@
+
+    
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<!-- <script src="../jquery-lib.min.js"></script> -->
+<script src="./tollPlaza.js"></script>
+<script>
+    const repo = new VehicleRepo();
+    function populateDropDownBox(){
+        const sl = document.getElementById("slType");
+        for(let i =0; i < localStorage.length; i++){
+            debugger;
+            let option = document.createElement("option");
+            option.textContent = localStorage.key(i);
+            sl.appendChild(option);
+        }
+    }
+    function  displayStatstics(vehicle){
+        const data=repo.getAllDetails();
+        console.log(data);
+        // for( const obj of data.keys()){
+        //     let values=data.get(obj);
+        //     let row=`<td>
+        //         <td rowspan="${values.length+1}">${obj}</td>
+        //         <td>`;
+        //         let amount=0;
+        //         let r1="";
+        //         for (const i of values){
+        //             r1+=`<tr><td>${i.vehicleNo}</td></tr>`;
+        //             amount+=i.amount;  
+        //         }
+        //         // $each(values, (index,value)=>{
+        //         //     r1+=`<tr><td>${value.vehicleNo}</td></tr>`;
+        //         //     amount+=values.amount;  
+        //         // })
+        //         r1+=`</td><td  rowspan="${values.length+1}">${amount}</td> `;
+        //         row+=r1;
+        //     $("table").append(row);
+
+        // }
+
+
+
+    }
+
+    
+    $().ready(function(){
+        $("div").hide();
+        localStorage.setItem("Car", 90);
+        localStorage.setItem("Bike", 30);
+        localStorage.setItem("Bus", 290);
+        localStorage.setItem("Truck", 490);
+        populateDropDownBox();
+        // $("button:first").click(function(){
+        //     const type = prompt("Enter the Vehicle Type")
+        //     addVehicle(type);
+        // })
+
+        // $("button:last").click(function(){
+        //     const table = [];
+        //     for (const key of data.keys()) {
+        //         table.push({"Vehicle Type" : key, "Total Vehicles" : data.get(key), "Amount" : getDetails(key)})
+        //     }
+        //     console.table(table);
+        // })
+        $("#slType").change(function(){
+            const type = $("#slType").val();
+            const amount = localStorage.getItem(type);
+            $("#txtAmount").val(amount)
+        })
+        $("div").find("button:eq(0)").click(function(){
+            const vNo = $("#txtNo").val();
+            const type = $("#slType").val();
+            const amount = parseInt($("#txtAmount").val());
+
+            const obj = new Vehicle(vNo, type, amount);
+            repo.addNewVehicle(obj);
+            alert("Vehicle details added successfully!!");
+            console.log(JSON.stringify(data));
+
+        })
+        $('nav>button:first').click(function(){
+            $('div').hide();
+            $("div:first").show(2000)
+        })
+        $('nav>button:last').click(function(){
+            $('div').hide();
+            $("div:last").show(2000);
+            displayStatstics();
+        })
+    })
+
+</script>
+<nav>
+    <button>Add Vehicle</button>
+    <button>Display</button>
+</nav>
+
+<div>
+    <h1>Add New Vehicle</h1>
+    <hr>
+    <p>
+        <input type="text" id="txtNo" style="text-transform:uppercase">
+        <select id="slType">
+            <option></option>
+        </select>
+        <input type="text" id="txtAmount" disabled>
+        <button>Add Vehicle</button>
+    </p>
+</div>
+<div>
+    <h1>Vehicle Details</h1><hr>
+    <table border="1">
+        <tr><td>Vehicle Type</td>
+        <td>Vehicle Details</td>
+        </tr>
+    </table>
+</div>
+
