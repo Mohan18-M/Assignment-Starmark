@@ -6,123 +6,153 @@ using System.Threading.Tasks;
 
 namespace SampleFramework.cs.Practical
 {
+ class Patient
+    {
+        public int PatientID { get; set; }
+        public string PatientName { get; set; }
+        public string Disease { get; set; }
+        public string Symptoms { get; set; }
+    }
     class Disease
     {
-        public int DiseaseID { get; set; }
         public string DiseaseName { get; set; }
         public string Severity { get; set; }
-        public string Description { get; set; }
     }
 
-    class DiseaseManager
+    class Symptom
     {
-        private Disease[] _diseases = null;
-        private int _size = 0;
-        public DiseaseManager(int size)
+        public string DiseaseName { get; set; }
+        public string Symptoms { get; set; }
+        public string Discription { get; set; }
+    }
+
+    //interface Sample
+    //{
+    //    void AddDisease(Disease disease);
+    //    void AddSymptoms(Symptom symptom);
+    //    void CheckPatient();
+    //}
+
+    class MedResearchManager 
+    {
+        private Disease[] diseases = null;
+            private Symptom[] symptoms = null;
+        int _size = 0;
+
+        public MedResearchManager(int size)
         {
             _size = size;
-            _diseases = new Disease[_size];
+            symptoms= new Symptom[_size];
+            diseases = new Disease[_size];
         }
 
-        public int AddDiseaseDetails(Disease disease)
+        public void AddDisease(Disease disease)
         {
-            for(int i = 0; i < _size; i++)
+            for(int i=0;i<diseases.Length;i++)
             {
-                if(_diseases[i] == null)
+                if (diseases[i] == null)
                 {
-                    _diseases[i] = new Disease
-                    {
-                        DiseaseID = i,
-                        DiseaseName = disease.DiseaseName,
-                        Severity = disease.Severity,
-                        Description = disease.Description
-                    };
-                    return _diseases[i].DiseaseID;
-
+                    diseases[i] = new Disease { DiseaseName = disease.DiseaseName, Severity = disease.Severity };
+                    return;
                 }
             }
-            throw new Exception("Unable to complete the process");
+            throw new Exception("This type of Disease not Exist");
         }
-
-        
-    }
-
-    enum Options
-    {
-        AddDisease, AddSymptom, CheckPatient
-    }
-
-    class UI
-    {
-        public const string menu = "----------Medical Research Software------------" +
-            "\nTo Add Disease Details------>Press 1\nTo Add Symptom Details----->Press 2" +
-            "\nTo Check Patient--------->Press 3\nEnter any key to Exit...........";
-        private static DiseaseManager dis;
-
-        public static void View()
+        public void AddSymptom(Symptom symptom)
         {
-            int size = Utilities.GetNumber("Enter the Disease details to store");
-            dis = new DiseaseManager(size);
-            bool processing = true;
-            do
+            for (int i = 0; i < diseases.Length; i++)
             {
-                Options options = (Options)Utilities.GetNumber(menu);
-                processing = processMenu(options);
+                symptoms[i] = new Symptom { DiseaseName = symptom.DiseaseName, Symptoms = symptom.Symptoms, Discription = symptom.Discription };
+                return;
+
             }
-            while (processing);
-            Console.WriteLine("Thanks for using out application");
         }
-        private static bool processMenu(Options options)
+        public void Patient()
         {
-            switch (options)
+            Console.WriteLine("Enter the Patient Name");
+            string Name = Console.ReadLine();
+
+            Console.WriteLine("Enter the Symptoms");
+            string SymptomType = Console.ReadLine();
+            if(diseases != null)
             {
-                case Options.AddDiseaseDetails();
-                    break;
-                case Options.AddSymptomDetails();
-                    break;
-                case Options.CheckPatientDetails();
-                    break;
-                default:
-                    return false;
+                for(int i=0;i<diseases.Length;i++)
+                {
+                    try
+                    {
+                      if (symptoms[i].Symptoms.Contains(SymptomType))
+                        {
+                            Console.WriteLine("Disease : " + symptoms[i].DiseaseName);
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
             }
-            return true;
-        }
-    }
-    class Patient
-    {
-        string Name;
-        string Disease;
-        string Symptom;
-
-        public string PatientName
-        {
-            get { return Name; }
-            set { Name = value; }
-        }
-
-        public string PatientDisease
-        {
-            get { return Disease; }
-            set { Disease = value; }
-        }
-        public string PatientSymptom
-        {
-            get { return Symptom; }
-            set { Symptom = value; }
         }
     }
 
-    private void AddDisease()
-    {
-        string DiseaseName = Utilities.Prompt("Enter the Disease Name");
-    }
-    class MedicalResearch
+     class MedicalResearchApp
     {
         static void Main(string[] args)
         {
-            UI.View();
-            
+            Console.WriteLine("Enter the size of the Array");
+            int size = Convert.ToInt32(Console.ReadLine());
 
+            MedResearchManager medResearchManager = new MedResearchManager(size);
+            void addDisease()
+            {
+                Console.WriteLine("Enter the Disease Name");
+                string disease = Console.ReadLine();
+
+                Console.WriteLine("Enter the Severity");
+                string severity = Console.ReadLine();
+
+                Disease disease1 = new Disease { DiseaseName = disease, Severity = severity };
+                medResearchManager.AddDisease(disease1);
+            }
+
+            void addSymptom()
+            {
+                Console.WriteLine("Enter the Disease Name");
+                string disease = Console.ReadLine();
+
+                Console.WriteLine("Enter the Symptoms");
+                string symptom = Console.ReadLine();
+                Console.WriteLine("Enter the Description");
+                string description = Console.ReadLine();
+
+                Symptom symptom1 = new Symptom { DiseaseName = disease, Symptoms = symptom, Discription = description };
+                medResearchManager.AddSymptom(symptom1);
+            }
+            void checkPatient()
+            {
+                medResearchManager.Patient();
+            }
+            bool processing = true;
+            do
+            {
+                Console.WriteLine("--------------Medical Research Application----------");
+                Console.WriteLine("To Add Disease Details ----->Press 1\n To Add Symptom Details ------>Press 2\n To Check Patient Details ---------> Press 3");
+                string choices = Console.ReadLine();
+                switch (choices)
+                {
+                    case "1":
+                        addDisease();
+                        break;
+                    case "2":
+                        addSymptom();
+                        break;
+                    case "3":
+                        checkPatient();
+                        break;
+                }
+            }
+            while (processing);
         }
     }
 }
+
+   
